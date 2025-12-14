@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitChecker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #000000; /* Batman Black */
+        color: #e5e5e5;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #444; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #fbbf24; /* Amber accent */
+      }
+      
+      /* Print specific styles for PDF generation */
+      @media print {
+        body {
+          background-color: white !important;
+          color: black !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        #root {
+          background-color: white !important;
+        }
+        .no-print {
+          display: none !important;
+        }
+        .print-only {
+          display: block !important;
+        }
+        /* Override dark mode text/bg for print */
+        [class*="text-"] {
+          color: black !important;
+        }
+        [class*="bg-"] {
+          background-color: transparent !important;
+        }
+        [class*="border-"] {
+          border-color: #ddd !important;
+        }
+        .print-break-inside-avoid {
+          break-inside: avoid;
+        }
+      }
+
+      /* Loading Bat Animation (Silhouette against Moon) */
+      @keyframes fly-in-place {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-12px); }
+      }
+      @keyframes wing-flap-realistic {
+        0% { transform: scaleY(1) rotate(0deg); }
+        50% { transform: scaleY(0.6) rotate(5deg); }
+        100% { transform: scaleY(1) rotate(0deg); }
+      }
+      .bat-realistic-body {
+        animation: fly-in-place 3s ease-in-out infinite;
+      }
+      .bat-realistic-wing-left {
+        transform-origin: right center;
+        animation: wing-flap-realistic 0.3s ease-in-out infinite;
+      }
+      .bat-realistic-wing-right {
+        transform-origin: left center;
+        animation: wing-flap-realistic 0.3s ease-in-out infinite;
+      }
+
+      /* 3D Talking Bat Animation */
+      .bat-talk-scene {
+        perspective: 600px;
+        transform-style: preserve-3d;
+      }
+      
+      /* Body floats gently */
+      .bat-talk-pivot {
+        transform-style: preserve-3d;
+        animation: talk-float 4s ease-in-out infinite;
+      }
+      @keyframes talk-float {
+        0%, 100% { transform: translateY(0) rotateX(5deg); }
+        50% { transform: translateY(-10px) rotateX(-5deg); }
+      }
+
+      /* Head bobs to simulate talking/gesturing */
+      .bat-talk-head {
+        transform-origin: 50% 80%; /* Pivot near neck */
+        animation: talk-head-bob 3s ease-in-out infinite;
+      }
+      @keyframes talk-head-bob {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(5deg) translateY(-2px); }
+        75% { transform: rotate(-5deg) translateY(-2px); }
+      }
+
+      /* Mouth opens and closes rapidly */
+      .bat-talk-mouth {
+        transform-origin: 50% 0%;
+        animation: talk-mouth-move 0.4s ease-in-out infinite;
+      }
+      @keyframes talk-mouth-move {
+        0%, 100% { transform: scaleY(0.2); opacity: 0.5; }
+        50% { transform: scaleY(1); opacity: 1; }
+      }
+
+      /* Wings flap slowly and naturally */
+      .bat-talk-wing-l {
+        transform-origin: right center;
+        animation: talk-flap-l 2s ease-in-out infinite alternate;
+      }
+      .bat-talk-wing-r {
+        transform-origin: left center;
+        animation: talk-flap-r 2s ease-in-out infinite alternate;
+      }
+      @keyframes talk-flap-l {
+        from { transform: rotateY(10deg); }
+        to { transform: rotateY(-30deg); }
+      }
+      @keyframes talk-flap-r {
+        from { transform: rotateY(-10deg); }
+        to { transform: rotateY(30deg); }
+      }
+
+      /* Smooth Entry Animation */
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-slide-in {
+        animation: slideIn 0.6s ease-out forwards;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3/",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "recharts": "https://esm.sh/recharts@^2.12.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  </body>
+</html>
